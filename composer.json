@@ -12,7 +12,7 @@
 	"minimum-stability": "dev",
 	"autoload": {
 		"psr-4": {
-			"yii2module\\markdown\\": "src"
+			"yii2module\\markdown\\": "src",
 			"yii2module\\markdown\\tests\\": "tests"
 		}
 	},

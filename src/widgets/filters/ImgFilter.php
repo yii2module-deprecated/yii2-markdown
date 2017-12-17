@@ -3,10 +3,10 @@
 namespace yii2module\markdown\widgets\filters;
 
 use Yii;
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii2lab\helpers\yii\Html;
 
-class ImgFilter extends Object {
+class ImgFilter extends BaseObject {
 
 	public function run($html) {
 		$html = $this->replace($html);

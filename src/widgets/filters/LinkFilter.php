@@ -2,12 +2,11 @@
 
 namespace yii2module\markdown\widgets\filters;
 
-use Yii;
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii\helpers\Url;
 use yii2module\guide\module\helpers\NavigationHelper;
 
-class LinkFilter extends Object {
+class LinkFilter extends BaseObject {
 
 	public function run($html) {
 		$html = $this->replaceExternalLink($html);

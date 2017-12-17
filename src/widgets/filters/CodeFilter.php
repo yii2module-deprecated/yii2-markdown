@@ -2,11 +2,10 @@
 
 namespace yii2module\markdown\widgets\filters;
 
-use Yii;
-use yii\base\Object;
+use yii\base\BaseObject;
 use yii2module\markdown\widgets\helpers\HighlightHelper;
 
-class CodeFilter extends Object {
+class CodeFilter extends BaseObject {
 
 	public function run($html) {
 		$html = $this->replace($html);

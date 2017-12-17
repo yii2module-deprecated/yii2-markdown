@@ -3,9 +3,9 @@
 namespace yii2module\markdown\widgets\filters;
 
 use Yii;
-use yii\base\Object;
+use yii\base\BaseObject;
 
-class AlertFilter extends Object {
+class AlertFilter extends BaseObject {
 
 	public function run($html) {
 		$html = $this->replace($html);

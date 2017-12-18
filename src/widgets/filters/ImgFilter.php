@@ -4,10 +4,14 @@ namespace yii2module\markdown\widgets\filters;
 
 use Yii;
 use yii\base\BaseObject;
+use yii2lab\helpers\yii\FileHelper;
 use yii2lab\helpers\yii\Html;
 
 class ImgFilter extends BaseObject {
-
+	
+	const FILE_NO_IMAGE = '@frontend/web/images/image/no_image.png';
+	const WEB_NO_IMAGE = '@web/images/image/no_image.png';
+	
 	public function run($html) {
 		$html = $this->replace($html);
 		return $html;
@@ -23,6 +27,9 @@ class ImgFilter extends BaseObject {
 				return $matches[0];
 			}
 			$fileName = ROOT_DIR . DS . $project->dir . DS . $url;
+			if(!FileHelper::has($fileName)) {
+				$fileName = Yii::getAlias(self::FILE_NO_IMAGE);
+			}
 			$data = Html::getDataUrl($fileName);
 			return "<img src=\"{$data}\"{$matches[2]}>";
 		}, $html);

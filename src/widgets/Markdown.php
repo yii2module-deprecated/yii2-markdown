@@ -25,7 +25,7 @@ class Markdown extends Widget {
 
 	public function run() {
 		$html = MarkdownHelper::toHtml($this->content);
-		$html = FilterHelper::run($html, $this->filters);
+		$html = FilterHelper::runAll($this->filters, $html);
 		return $html;
 	}
 

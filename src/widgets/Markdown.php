@@ -4,7 +4,7 @@ namespace yii2module\markdown\widgets;
 
 use yii\apidoc\templates\bootstrap\assets\AssetBundle;
 use yii\base\Widget;
-use yii2module\markdown\widgets\helpers\FilterHelper;
+use yii2lab\misc\helpers\FilterHelper;
 use yii2module\markdown\widgets\helpers\MarkdownHelper;
 
 class Markdown extends Widget {

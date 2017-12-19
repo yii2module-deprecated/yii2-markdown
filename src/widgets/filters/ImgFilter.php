@@ -6,8 +6,9 @@ use Yii;
 use yii\base\BaseObject;
 use yii2lab\helpers\yii\FileHelper;
 use yii2lab\helpers\yii\Html;
+use yii2lab\misc\interfaces\FilterInterface;
 
-class ImgFilter extends BaseObject {
+class ImgFilter extends BaseObject implements FilterInterface {
 	
 	const FILE_NO_IMAGE = '@frontend/web/images/image/no_image.png';
 	const WEB_NO_IMAGE = '@web/images/image/no_image.png';

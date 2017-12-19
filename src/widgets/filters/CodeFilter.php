@@ -3,9 +3,10 @@
 namespace yii2module\markdown\widgets\filters;
 
 use yii\base\BaseObject;
+use yii2lab\misc\interfaces\FilterInterface;
 use yii2module\markdown\widgets\helpers\HighlightHelper;
 
-class CodeFilter extends BaseObject {
+class CodeFilter extends BaseObject implements FilterInterface {
 
 	public function run($html) {
 		$html = $this->replace($html);

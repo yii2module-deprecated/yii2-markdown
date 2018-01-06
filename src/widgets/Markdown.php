@@ -16,6 +16,7 @@ class Markdown extends Widget {
 		'yii2module\markdown\widgets\filters\ImgFilter',
 		'yii2module\markdown\widgets\filters\LinkFilter',
 		'yii2module\markdown\widgets\filters\MarkFilter',
+		'yii2module\markdown\widgets\filters\HeaderFilter',
 	];
 
 	public function init() {

@@ -10,12 +10,37 @@ use yii2module\guide\module\helpers\NavigationHelper;
 class LinkFilter extends BaseObject implements FilterInterface {
 
 	public function run($html) {
+		$html = $this->replaceGithubFileLink($html);
+		$html = $this->replaceGithubDirectoryLink($html);
 		$html = $this->replaceExternalLink($html);
 		$html = $this->replaceInternalLink($html);
 		
 		return $html;
 	}
-
+	
+	private function replaceGithubFileLink($html) {
+		$pattern = '~<a href="https://github.com/(.+)/(.+)/blob/.+/guide/.+/(.+).md">([^<]+)?</a>~';
+		$callback = function ($matches) {
+			$url[] = NavigationHelper::URL_ARTICLE_VIEW;
+			$url['project_id'] = $matches[1] . '.' . $matches[2];
+			$url['id'] = $matches[3];
+			return '<a href="'.Url::to($url).'">'.$matches[2].'</a>';
+		};
+		$html = preg_replace_callback($pattern, $callback, $html);
+		return $html;
+	}
+	
+	private function replaceGithubDirectoryLink($html) {
+		$pattern = '~<a href="https://github.com/(.+)/(.+)/tree/.+/guide/.+">([^<]+)?</a>~';
+		$callback = function ($matches) {
+			$url[] = NavigationHelper::URL_ARTICLE_INDEX;
+			$url['project_id'] = $matches[1] . '.' . $matches[2];
+			return '<a href="'.Url::to($url).'">'.$matches[3].'</a>';
+		};
+		$html = preg_replace_callback($pattern, $callback, $html);
+		return $html;
+	}
+	
 	private function replaceInternalLink($html) {
 		$pattern = '~<a href="(.+).md">([^<]+)?</a>~';
 		$callback = function ($matches) {

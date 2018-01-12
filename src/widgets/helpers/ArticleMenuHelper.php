@@ -70,9 +70,11 @@ class ArticleMenuHelper {
 	}
 	
 	private static function headerName($item) {
-		$scope = 'header-' . $item['level'] . $item['content'];
-		$hash = hash('crc32b', $scope);
-		return $hash;
+		$name = $item['content'];
+		$name = preg_replace('#\s+#', ' ', $name);
+		$name = trim($name);
+		$name = str_replace([' ', '#', '?'], '-', $name);
+		return $name;
 	}
 	
 }

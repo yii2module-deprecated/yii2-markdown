@@ -7,6 +7,7 @@ use yii2lab\helpers\yii\Html;
 class ArticleMenuHelper {
 	
 	const HEADER_PATTERN = '~<h([2-6]{1}).*>(.+)</h[2-6]{1}.*>~m';
+	const HEADER_PATTERN1 = '~\s*([#]+)\s*(.+)$~m';
 	
 	public static function makeMenuMd($menu) {
 		$headersMd = PHP_EOL;
@@ -44,6 +45,19 @@ class ArticleMenuHelper {
 		return $menu;
 	}
 	
+	public static function getMenuFromMarkdown($md) {
+		$menu = [];
+		$callback = function($matches) use(&$menu) {
+			$item = self::buildMenuItem(strlen($matches[1]), $matches[2]);
+			if(!empty($item['content'])) {
+				$item['content'] = trim($item['content']);
+				$menu[$item['name']] = $item;
+			}
+		};
+		preg_replace_callback(self::HEADER_PATTERN1, $callback, $md);
+		return $menu;
+	}
+	
 	private static function getMinMargin($menu) {
 		$min = 10;
 		foreach($menu as $item) {
@@ -72,7 +86,12 @@ class ArticleMenuHelper {
 	private static function headerName($item) {
 		$name = $item['content'];
 		$name = preg_replace('#\s+#', ' ', $name);
-		$name = trim($name);
+		$name = mb_ereg_replace('#[\W]+#', '-', $name);
+		$strtolowerCallback = function ($matches) {
+			return strtolower($matches[1]);
+		};
+		$name = preg_replace_callback('/([A-Za-z]+)/', $strtolowerCallback, $name);
+		$name = trim($name,  ' -');
 		$name = str_replace([' ', '#', '?'], '-', $name);
 		return $name;
 	}

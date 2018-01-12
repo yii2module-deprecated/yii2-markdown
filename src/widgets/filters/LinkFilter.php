@@ -24,7 +24,7 @@ class LinkFilter extends BaseObject implements FilterInterface {
 			$url[] = NavigationHelper::URL_ARTICLE_VIEW;
 			$url['project_id'] = $matches[1] . '.' . $matches[2];
 			$url['id'] = $matches[3];
-			return '<a href="'.Url::to($url).'">'.$matches[2].'</a>';
+			return '<a href="'.Url::to($url).'">'.$matches[4].'</a>';
 		};
 		$html = preg_replace_callback($pattern, $callback, $html);
 		return $html;

@@ -7,7 +7,7 @@ use yii2lab\helpers\yii\Html;
 class ArticleMenuHelper {
 	
 	const HEADER_PATTERN = '~<h([2-6]{1}).*>(.+)</h[2-6]{1}.*>~m';
-	const HEADER_PATTERN1 = '~\s*([#]+)\s*(.+)$~m';
+	const HEADER_PATTERN1 = '~^([#]+)\s*(.+)$~m';
 	
 	public static function makeMenuMd($menu) {
 		$headersMd = PHP_EOL;

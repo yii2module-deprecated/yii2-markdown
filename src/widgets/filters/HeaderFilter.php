@@ -3,7 +3,7 @@
 namespace yii2module\markdown\widgets\filters;
 
 use yii\base\BaseObject;
-use yii2lab\misc\interfaces\FilterInterface;
+use yii2lab\designPattern\filter\interfaces\FilterInterface;
 use yii2module\markdown\widgets\helpers\ArticleMenuHelper;
 use yii2module\markdown\widgets\helpers\MarkdownHelper;
 

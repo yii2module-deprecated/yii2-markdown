@@ -6,7 +6,7 @@ use Yii;
 use yii\base\BaseObject;
 use yii2lab\helpers\yii\FileHelper;
 use yii2lab\helpers\yii\Html;
-use yii2lab\misc\interfaces\FilterInterface;
+use yii2lab\designPattern\filter\interfaces\FilterInterface;
 
 class ImgFilter extends BaseObject implements FilterInterface {
 	

@@ -4,7 +4,7 @@ namespace yii2module\markdown\widgets\filters;
 
 use yii\base\BaseObject;
 use yii\helpers\Url;
-use yii2lab\misc\interfaces\FilterInterface;
+use yii2lab\designPattern\filter\interfaces\FilterInterface;
 use yii2module\guide\module\helpers\NavigationHelper;
 
 class LinkFilter extends BaseObject implements FilterInterface {

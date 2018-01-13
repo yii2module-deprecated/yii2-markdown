@@ -4,7 +4,7 @@ namespace yii2module\markdown\widgets\filters;
 
 use yii\base\BaseObject;
 use yii\web\ErrorHandler;
-use yii2lab\misc\interfaces\FilterInterface;
+use yii2lab\designPattern\filter\interfaces\FilterInterface;
 
 class MarkFilter extends BaseObject implements FilterInterface {
 

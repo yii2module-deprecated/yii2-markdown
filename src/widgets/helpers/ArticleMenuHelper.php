@@ -2,12 +2,13 @@
 
 namespace yii2module\markdown\widgets\helpers;
 
+use yii2lab\helpers\StringHelper;
 use yii2lab\helpers\yii\Html;
 
 class ArticleMenuHelper {
 	
 	const HEADER_PATTERN = '~<h([2-6]{1}).*>(.+)</h[2-6]{1}.*>~m';
-	const HEADER_PATTERN1 = '~^([#]+)\s*(.+)$~m';
+	const HEADER_PATTERN1 = '~^([#]+)\s+(.+)$~m';
 	
 	public static function makeMenuMd($menu) {
 		$headersMd = PHP_EOL;
@@ -20,8 +21,14 @@ class ArticleMenuHelper {
 	}
 	
 	public static function addIdInHeaders($html) {
-		$callback = function($matches) {
-			$item = self::buildMenuItem($matches[1], $matches[2]);
+		$count = 0;
+		$callback = function($matches) use(&$count) {
+			$count++;
+			$item = self::buildMenuItem([
+				'level' => $matches[1],
+				'content' => $matches[2],
+				'order' => $count,
+			]);
 			$rightContent = '';
 			$rightContent .= Html::a(Html::fa('hashtag', ['class' => ''], 'fa fa-', 'small'), '#' . $item['name']);
 			$rightContent .= NBSP;
@@ -34,22 +41,33 @@ class ArticleMenuHelper {
 	}
 	
 	public static function getMenuFromHtml($html) {
+		$count = 0;
 		$menu = [];
-		$callback = function($matches) use(&$menu) {
-			$item = self::buildMenuItem($matches[1], $matches[2]);
+		$callback = function($matches) use(&$menu, &$count) {
+			$count++;
+			$item = self::buildMenuItem([
+				'level' => $matches[1],
+				'content' => $matches[2],
+				'order' => $count,
+			]);
 			if(!empty($item['content'])) {
 				$menu[$item['name']] = $item;
 			}
 		};
 		preg_replace_callback(self::HEADER_PATTERN, $callback, $html);
-		
 		return $menu;
 	}
 	
 	public static function getMenuFromMarkdown($md) {
+		$count = 0;
 		$menu = [];
-		$callback = function($matches) use(&$menu) {
-			$item = self::buildMenuItem(strlen($matches[1]), $matches[2]);
+		$callback = function($matches) use(&$menu, &$count) {
+			$count++;
+			$item = self::buildMenuItem([
+				'level' => $matches[1],
+				'content' => $matches[2],
+				'order' => $count,
+			]);
 			if(!empty($item['content'])) {
 				$item['content'] = trim($item['content']);
 				$menu[$item['name']] = $item;
@@ -77,21 +95,20 @@ class ArticleMenuHelper {
 		
 	}
 	
-	private static function buildMenuItem($level, $content) {
-		$item['level'] = intval($level);
-		$item['content'] = strip_tags($content);
+	private static function buildMenuItem($item) {
+		$item['level'] = intval($item['level']);
+		$item['content'] = strip_tags($item['content']);
+		$item['order'] = intval($item['order']);
 		$item['name'] = self::headerName($item);
 		return $item;
 	}
 	
 	private static function headerName($item) {
-		$name = $item['content'];
-		$name = preg_replace('#\s+#', ' ', $name);
-		$name = mb_ereg_replace('#[\W]+#', '-', $name);
-		$strtolowerCallback = function ($matches) {
-			return strtolower($matches[1]);
-		};
-		$name = preg_replace_callback('/([A-Za-z]+)/', $strtolowerCallback, $name);
+		$scope = serialize($item);
+		$hash = hash('crc32b', $scope);
+		$name = $item['content'] . BL . $hash;
+		$nameArray = StringHelper::getWordArray($name);
+		$name = implode('-', $nameArray);
 		$name = trim($name,  ' -');
 		$name = str_replace([' ', '#', '?'], '-', $name);
 		return $name;

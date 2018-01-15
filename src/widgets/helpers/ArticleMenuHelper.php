@@ -23,9 +23,10 @@ class ArticleMenuHelper {
 		$callback = function($matches) {
 			$item = self::buildMenuItem($matches[1], $matches[2]);
 			$rightContent = '';
-			$rightContent .= Html::a(Html::fa('arrow-up', ['class' => 'pull-right'], 'fa fa-', 'small'), '#go_to_top');
-			$rightContent .= Html::a(Html::fa('hashtag', ['class' => 'pull-right'], 'fa fa-', 'small'), '#' . $item['name']);
-			$tagHtml = self::buildHeader($item, $rightContent);
+			$rightContent .= Html::a(Html::fa('hashtag', ['class' => ''], 'fa fa-', 'small'), '#' . $item['name']);
+			$rightContent .= NBSP;
+			$rightContent .= Html::a(Html::fa('arrow-up', ['class' => ''], 'fa fa-', 'small'), '#go_to_top');
+			$tagHtml = self::buildHeader($item, '<span class="pull-right">'.$rightContent.'</span>');
 			return $tagHtml;
 		};
 		$html = preg_replace_callback(self::HEADER_PATTERN, $callback, $html);

@@ -107,6 +107,7 @@ class ArticleMenuHelper {
 		$scope = serialize($item);
 		$hash = hash('crc32b', $scope);
 		$name = $item['content'] . BL . $hash;
+		$name = mb_strtolower($name);
 		$nameArray = StringHelper::getWordArray($name);
 		$name = implode('-', $nameArray);
 		$name = trim($name,  ' -');

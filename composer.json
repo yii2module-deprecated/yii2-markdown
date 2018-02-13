@@ -18,6 +18,7 @@
 	},
 	"require": {
 		"yiisoft/yii2": "*",
+		"michelf/php-markdown": "^1.8",
 		"php": ">=5.3.0"
 	}
 }

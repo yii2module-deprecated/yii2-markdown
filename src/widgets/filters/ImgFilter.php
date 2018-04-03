@@ -20,7 +20,7 @@ class ImgFilter extends BaseObject implements FilterInterface {
 
 	private function replace($html) {
 		$project_id = Yii::$app->request->getQueryParam('project_id');
-		$project = Yii::$app->guide->project->oneById($project_id);
+		$project = Yii::$domain->guide->project->oneById($project_id);
 		$pattern = '~<img src="([^"]+)"([^\>]*)>~';
 		$html = preg_replace_callback($pattern, function($matches) use($project) {
 			$url = $matches[1];

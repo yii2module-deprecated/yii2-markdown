@@ -2,18 +2,18 @@
 
 namespace yii2module\markdown\widgets\filters;
 
-use yii\base\BaseObject;
-use yii2lab\designPattern\filter\interfaces\FilterInterface;
+use yii2lab\designPattern\scenario\base\BaseScenario;
 use yii2module\markdown\widgets\helpers\ArticleMenuHelper;
 use yii2module\markdown\widgets\helpers\MarkdownHelper;
 
-class HeaderFilter extends BaseObject implements FilterInterface {
-
-	public function run($html) {
+class HeaderFilter extends BaseScenario {
+	
+	public function run() {
+		$html = $this->getData();
 		$html = $this->replace($html);
-		return $html;
+		$this->setData($html);
 	}
-
+	
 	private function replace($html) {
 		$menu = ArticleMenuHelper::getMenuFromHtml($html);
 		if(!empty($menu)) {

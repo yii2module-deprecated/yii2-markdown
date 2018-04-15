@@ -2,20 +2,21 @@
 
 namespace yii2module\markdown\widgets\filters;
 
-use yii\base\BaseObject;
 use yii\helpers\Url;
-use yii2lab\designPattern\filter\interfaces\FilterInterface;
+use yii2lab\designPattern\scenario\base\BaseScenario;
 use yii2module\guide\module\helpers\NavigationHelper;
 
-class LinkFilter extends BaseObject implements FilterInterface {
-
-	public function run($html) {
+class LinkFilter extends BaseScenario {
+	
+	public function run() {
+		$html = $this->getData();
+		
 		$html = $this->replaceGithubFileLink($html);
 		$html = $this->replaceGithubDirectoryLink($html);
 		$html = $this->replaceExternalLink($html);
 		$html = $this->replaceInternalLink($html);
 		
-		return $html;
+		$this->setData($html);
 	}
 	
 	private function replaceGithubFileLink($html) {

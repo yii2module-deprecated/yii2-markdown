@@ -4,7 +4,7 @@ namespace yii2module\markdown\widgets;
 
 use yii\apidoc\templates\bootstrap\assets\AssetBundle;
 use yii\base\Widget;
-use yii2lab\designPattern\filter\helpers\FilterHelper;
+use yii2lab\designPattern\scenario\helpers\ScenarioHelper;
 use yii2module\markdown\widgets\helpers\MarkdownHelper;
 
 class Markdown extends Widget {
@@ -23,11 +23,16 @@ class Markdown extends Widget {
 		parent::init();
 		$this->registerAssets();
 	}
-
+	
+	/**
+	 * @return string
+	 * @throws \yii\base\InvalidConfigException
+	 * @throws \yii\web\ServerErrorHttpException
+	 */
 	public function run() {
 		$html = MarkdownHelper::toHtml($this->content);
-		$html = FilterHelper::runAll($this->filters, $html);
-		return $html;
+		$filterCollection = ScenarioHelper::forgeCollection($this->filters);
+		return ScenarioHelper::runAll($filterCollection, $html);
 	}
 
 	protected function registerAssets() {

@@ -4,18 +4,20 @@ namespace yii2module\markdown\widgets\filters;
 
 use Yii;
 use yii\base\BaseObject;
+use yii2lab\designPattern\scenario\base\BaseScenario;
 use yii2lab\helpers\yii\FileHelper;
 use yii2lab\helpers\yii\Html;
 use yii2lab\designPattern\filter\interfaces\FilterInterface;
 
-class ImgFilter extends BaseObject implements FilterInterface {
+class ImgFilter extends BaseScenario {
 	
 	const FILE_NO_IMAGE = '@frontend/web/images/image/no_image.png';
 	const WEB_NO_IMAGE = '@web/images/image/no_image.png';
 	
-	public function run($html) {
+	public function run() {
+		$html = $this->getData();
 		$html = $this->replace($html);
-		return $html;
+		$this->setData($html);
 	}
 
 	private function replace($html) {

@@ -2,15 +2,15 @@
 
 namespace yii2module\markdown\widgets\filters;
 
-use yii\base\BaseObject;
-use yii2lab\designPattern\filter\interfaces\FilterInterface;
+use yii2lab\designPattern\scenario\base\BaseScenario;
 use yii2module\markdown\widgets\helpers\HighlightHelper;
 
-class CodeFilter extends BaseObject implements FilterInterface {
+class CodeFilter extends BaseScenario {
 
-	public function run($html) {
+	public function run() {
+		$html = $this->getData();
 		$html = $this->replace($html);
-		return $html;
+		$this->setData($html);
 	}
 
 	private function replace($html) {

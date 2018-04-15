@@ -2,17 +2,17 @@
 
 namespace yii2module\markdown\widgets\filters;
 
-use yii\base\BaseObject;
 use yii\web\ErrorHandler;
-use yii2lab\designPattern\filter\interfaces\FilterInterface;
+use yii2lab\designPattern\scenario\base\BaseScenario;
 
-class MarkFilter extends BaseObject implements FilterInterface {
-
-	public function run($html) {
+class MarkFilter extends BaseScenario {
+	
+	public function run() {
+		$html = $this->getData();
 		$html = $this->replace($html);
-		return $html;
+		$this->setData($html);
 	}
-
+	
 	private function replace($html) {
 		$pattern = '~\[\[(.+?)\]\]~';
 		$html = preg_replace_callback($pattern, function($matches) {

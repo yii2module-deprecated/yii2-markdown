@@ -3,14 +3,14 @@
 namespace yii2module\markdown\widgets\filters;
 
 use Yii;
-use yii\base\BaseObject;
-use yii2lab\designPattern\filter\interfaces\FilterInterface;
+use yii2lab\designPattern\scenario\base\BaseScenario;
 
-class AlertFilter extends BaseObject implements FilterInterface {
+class AlertFilter extends BaseScenario {
 
-	public function run($html) {
+	public function run() {
+		$html = $this->getData();
 		$html = $this->replace($html);
-		return $html;
+		$this->setData($html);
 	}
 
 	private function replace($html) {

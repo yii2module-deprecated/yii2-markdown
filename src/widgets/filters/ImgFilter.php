@@ -4,10 +4,9 @@ namespace yii2module\markdown\widgets\filters;
 
 use Yii;
 use yii\base\BaseObject;
-use yii2lab\designPattern\scenario\base\BaseScenario;
+use yii2lab\extension\scenario\base\BaseScenario;
 use yii2lab\helpers\yii\FileHelper;
 use yii2lab\helpers\yii\Html;
-use yii2lab\designPattern\filter\interfaces\FilterInterface;
 
 class ImgFilter extends BaseScenario {
 	

@@ -3,7 +3,7 @@
 namespace yii2module\markdown\widgets\filters;
 
 use yii\web\ErrorHandler;
-use yii2lab\designPattern\scenario\base\BaseScenario;
+use yii2lab\extension\scenario\base\BaseScenario;
 
 class MarkFilter extends BaseScenario {
 	

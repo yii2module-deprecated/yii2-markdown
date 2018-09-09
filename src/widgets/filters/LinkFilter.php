@@ -3,7 +3,7 @@
 namespace yii2module\markdown\widgets\filters;
 
 use yii\helpers\Url;
-use yii2lab\designPattern\scenario\base\BaseScenario;
+use yii2lab\extension\scenario\base\BaseScenario;
 use yii2module\guide\module\helpers\NavigationHelper;
 
 class LinkFilter extends BaseScenario {
